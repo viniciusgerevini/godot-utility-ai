@@ -1,0 +1,421 @@
+[gd_scene load_steps=43 format=3 uid="uid://dlmiqivx3ip34"]
+
+[ext_resource type="Script" path="res://example/characters/npc.gd" id="1_bqkex"]
+[ext_resource type="Texture2D" uid="uid://dhxl0pg5gubkl" path="res://example/assets/forestSprites_ v1.2/gnome_.png" id="2_op8pt"]
+[ext_resource type="Texture2D" uid="uid://m4umb36tgrxl" path="res://example/assets/forest_/forest_ [resources].png" id="3_obeon"]
+[ext_resource type="Script" path="res://addons/utility_ai/agent/agent.gd" id="3_to1fd"]
+[ext_resource type="Script" path="res://addons/utility_ai/actions/action.gd" id="4_c47f1"]
+[ext_resource type="Script" path="res://addons/utility_ai/considerations/consideration_from_node.gd" id="4_mf26v"]
+[ext_resource type="Script" path="res://addons/utility_ai/considerations/consideration.gd" id="5_wobr8"]
+[ext_resource type="Script" path="res://addons/utility_ai/considerations/aggregation.gd" id="6_xfwah"]
+[ext_resource type="Script" path="res://example/ai/considerations/has_node_in_group.gd" id="7_3wecl"]
+[ext_resource type="PackedScene" uid="uid://d0dhe2lv3x4u3" path="res://example/ai/utility_debug.tscn" id="8_ni6e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vtitq"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6fol"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(24, 96, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s66ib"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(0, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jy45v"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbmr3"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(0, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_426uu"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(24, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywfx4"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(48, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xi4t"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(72, 48, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sft02"]
+atlas = ExtResource("2_op8pt")
+region = Rect2(72, 120, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hm11v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vtitq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6fol")
+}],
+"loop": true,
+"name": &"eat",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s66ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jy45v")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbmr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_426uu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywfx4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xi4t")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sft02")
+}],
+"loop": true,
+"name": &"sleep",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rpsq"]
+size = Vector2(10, 15)
+
+[sub_resource type="Curve" id="Curve_rf44q"]
+_data = [Vector2(0, 0.217082), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_0jeci"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ugxur"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.499346, 0.202847), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_b8hm7"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3r8yg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 1, Vector2(0.247204, 1), 0.0, 0.0, 0, 0, Vector2(0.35123, 0.131673), -0.286564, -0.286564, 0, 0, Vector2(1, 0), -0.202957, 0.0, 1, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_xhtte"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_4rw1t"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_3xu6d"]
+_data = [Vector2(0, 0.0960854), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ms76l"]
+max_value = 1.3
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_rxl4x"]
+max_value = 1.3
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_sx507"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_17dxa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1pyaj"]
+_data = [Vector2(0, 0.13879), 0.0, 0.0, 0, 0, Vector2(0.499346, 0.202847), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_cbc15"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_t8cng"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jists"]
+max_value = 1.3
+_data = [Vector2(0, 1.00391), 0.0, 0.0, 0, 0, Vector2(1, 1.3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_kykfc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0950783, 1), 0.0, 0.0, 0, 0, Vector2(0.397092, 0.103203), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3exwa"]
+bg_color = Color(0.207843, 0.207843, 0.25098, 0.733333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thf84"]
+bg_color = Color(0.690196, 0.443137, 0.227451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqsrv"]
+bg_color = Color(0.862745, 0.266667, 0.286275, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kec47"]
+bg_color = Color(0, 0.556863, 0.733333, 1)
+
+[node name="npc" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_bqkex")
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_hm11v")
+animation = &"eat"
+autoplay = "idle"
+frame_progress = 0.863071
+
+[node name="mushroom" type="Sprite2D" parent="body"]
+visible = false
+position = Vector2(0, 8)
+texture = ExtResource("3_obeon")
+region_enabled = true
+region_rect = Rect2(147, 18, 6, 7)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_5rpsq")
+
+[node name="UtilityAiAgent" type="Node" parent="."]
+script = ExtResource("3_to1fd")
+
+[node name="Idle" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "idle"
+
+[node name="nothing" type="Node" parent="UtilityAiAgent/Idle"]
+script = ExtResource("5_wobr8")
+curve = SubResource("Curve_rf44q")
+
+[node name="Eat" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "eat"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Eat"]
+script = ExtResource("6_xfwah")
+aggregation_type = 2
+
+[node name="already eating" type="Node" parent="UtilityAiAgent/Eat/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "is_eating"
+curve = SubResource("Curve_0jeci")
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Eat/UtilityAiAggregation"]
+script = ExtResource("6_xfwah")
+
+[node name="hunger" type="Node" parent="UtilityAiAgent/Eat/UtilityAiAggregation/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../../..")
+property_name = "hunger"
+max_value = 100.0
+curve = SubResource("Curve_ugxur")
+
+[node name="food in pocket" type="Node" parent="UtilityAiAgent/Eat/UtilityAiAggregation/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../../..")
+property_name = "has_food_in_pocked"
+curve = SubResource("Curve_b8hm7")
+
+[node name="Sleep" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "sleep"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Sleep"]
+script = ExtResource("6_xfwah")
+aggregation_type = 2
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Sleep/UtilityAiAggregation"]
+script = ExtResource("6_xfwah")
+
+[node name="energy" type="Node" parent="UtilityAiAgent/Sleep/UtilityAiAggregation/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../../..")
+property_name = "energy"
+max_value = 100.0
+curve = SubResource("Curve_3r8yg")
+
+[node name="safe" type="Node" parent="UtilityAiAgent/Sleep/UtilityAiAggregation/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../../..")
+property_name = "is_safe"
+curve = SubResource("Curve_xhtte")
+
+[node name="is already sleeping" type="Node" parent="UtilityAiAgent/Sleep/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "is_sleeping"
+curve = SubResource("Curve_4rw1t")
+
+[node name="Relax" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "relax"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Relax"]
+script = ExtResource("6_xfwah")
+
+[node name="stress" type="Node" parent="UtilityAiAgent/Relax/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "stress"
+max_value = 100.0
+curve = SubResource("Curve_3xu6d")
+
+[node name="safe" type="Node" parent="UtilityAiAgent/Relax/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "is_safe"
+curve = SubResource("Curve_ms76l")
+
+[node name="Find food" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "find_food"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Find food"]
+script = ExtResource("6_xfwah")
+
+[node name="already looking for food" type="Node" parent="UtilityAiAgent/Find food/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "looking_for_food"
+curve = SubResource("Curve_rxl4x")
+
+[node name="food in pocket" type="Node" parent="UtilityAiAgent/Find food/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "has_food_in_pocked"
+curve = SubResource("Curve_sx507")
+
+[node name="food available" type="Node" parent="UtilityAiAgent/Find food/UtilityAiAggregation"]
+script = ExtResource("7_3wecl")
+target_group = "food"
+curve = SubResource("Curve_17dxa")
+
+[node name="hunger" type="Node" parent="UtilityAiAgent/Find food/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "hunger"
+max_value = 100.0
+curve = SubResource("Curve_1pyaj")
+
+[node name="Look for shelter" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "look_for_shelter"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Look for shelter"]
+script = ExtResource("6_xfwah")
+
+[node name="stress" type="Node" parent="UtilityAiAgent/Look for shelter/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "stress"
+max_value = 100.0
+curve = SubResource("Curve_cbc15")
+
+[node name="safe" type="Node" parent="UtilityAiAgent/Look for shelter/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "is_safe"
+curve = SubResource("Curve_t8cng")
+
+[node name="is already looking" type="Node" parent="UtilityAiAgent/Look for shelter/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "looking_for_shelter"
+curve = SubResource("Curve_jists")
+
+[node name="Go to sleep" type="Node" parent="UtilityAiAgent"]
+script = ExtResource("4_c47f1")
+_action_id = "go_to_sleep"
+
+[node name="UtilityAiAggregation" type="Node" parent="UtilityAiAgent/Go to sleep"]
+script = ExtResource("6_xfwah")
+
+[node name="energy" type="Node" parent="UtilityAiAgent/Go to sleep/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "energy"
+max_value = 100.0
+curve = SubResource("Curve_kykfc")
+
+[node name="safe" type="Node" parent="UtilityAiAgent/Go to sleep/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "is_safe"
+curve = SubResource("Curve_t8cng")
+
+[node name="is already looking" type="Node" parent="UtilityAiAgent/Go to sleep/UtilityAiAggregation" node_paths=PackedStringArray("node")]
+script = ExtResource("4_mf26v")
+node = NodePath("../../../..")
+property_name = "looking_for_shelter"
+curve = SubResource("Curve_jists")
+
+[node name="energy_bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(14, 0)
+offset_left = -7.0
+offset_top = -20.0
+offset_right = 7.0
+offset_bottom = -18.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3exwa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_thf84")
+step = 0.001
+value = 100.0
+show_percentage = false
+
+[node name="hunger_bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(14, 0)
+offset_left = -7.0
+offset_top = -23.0
+offset_right = 7.0
+offset_bottom = -21.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3exwa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_vqsrv")
+step = 0.001
+show_percentage = false
+
+[node name="stress_bar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(14, 0)
+offset_left = -7.0
+offset_top = -26.0
+offset_right = 7.0
+offset_bottom = -24.0
+theme_override_styles/background = SubResource("StyleBoxFlat_3exwa")
+theme_override_styles/fill = SubResource("StyleBoxFlat_kec47")
+step = 0.001
+show_percentage = false
+
+[node name="utility_debug" parent="." node_paths=PackedStringArray("utility_agent") instance=ExtResource("8_ni6e3")]
+position = Vector2(0, 4)
+utility_agent = NodePath("../UtilityAiAgent")
+
+[connection signal="top_score_action_changed" from="UtilityAiAgent" to="." method="_on_utility_ai_agent_top_score_action_changed"]

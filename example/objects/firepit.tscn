@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://cogyoyuushw2n"]
+
+[ext_resource type="Texture2D" uid="uid://m4umb36tgrxl" path="res://example/assets/forest_/forest_ [resources].png" id="1_fh3nk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c37du"]
+atlas = ExtResource("1_fh3nk")
+region = Rect2(112, 122, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnwui"]
+atlas = ExtResource("1_fh3nk")
+region = Rect2(128, 122, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4pl2"]
+atlas = ExtResource("1_fh3nk")
+region = Rect2(144, 122, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjgid"]
+atlas = ExtResource("1_fh3nk")
+region = Rect2(160, 122, 16, 19)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4txl"]
+atlas = ExtResource("1_fh3nk")
+region = Rect2(96, 122, 16, 19)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y2xns"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c37du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bnwui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4pl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjgid")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4txl")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[node name="firepit" type="AnimatedSprite2D" groups=["firepit"]]
+position = Vector2(0, -9)
+sprite_frames = SubResource("SpriteFrames_y2xns")
+animation = &"off"
+autoplay = "default"

@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxqcrolaoxws5"]
+
+[ext_resource type="PackedScene" uid="uid://cqugysovnf1yq" path="res://example/main.tscn" id="1_0ibrl"]
+[ext_resource type="PackedScene" uid="uid://dlmiqivx3ip34" path="res://example/characters/npc.tscn" id="2_qt47n"]
+[ext_resource type="PackedScene" uid="uid://crtxn5v84rifo" path="res://example/objects/mushroom.tscn" id="3_k2ke0"]
+
+[node name="multiple_npcs" type="Node2D"]
+
+[node name="main" parent="." instance=ExtResource("1_0ibrl")]
+current_debug_mode = 1
+
+[node name="npc2" parent="main" instance=ExtResource("2_qt47n")]
+position = Vector2(38, 0)
+hunger = 50
+stress = 30
+
+[node name="npc3" parent="main" instance=ExtResource("2_qt47n")]
+position = Vector2(38, -65)
+hunger = 25
+
+[node name="mushroom9" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-78, 74)
+
+[node name="mushroom10" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-169, -3)
+
+[node name="mushroom11" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-135, -121)
+
+[node name="mushroom12" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-103, -49)
+
+[node name="mushroom13" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(110, -131)
+
+[node name="mushroom14" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(103, -50)
+
+[node name="mushroom15" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(121, -8)
+
+[node name="mushroom16" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(181, -82)
+
+[node name="mushroom17" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(193, -12)
+
+[node name="mushroom18" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-183, 34)
+
+[node name="mushroom19" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-146, 79)
+
+[node name="mushroom20" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(-32, 83)
+
+[node name="mushroom21" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(61, 74)
+
+[node name="mushroom22" parent="main" instance=ExtResource("3_k2ke0")]
+position = Vector2(166, 83)

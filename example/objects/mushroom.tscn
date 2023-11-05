@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://crtxn5v84rifo"]
+
+[ext_resource type="Texture2D" uid="uid://m4umb36tgrxl" path="res://example/assets/forest_/forest_ [resources].png" id="1_e4cte"]
+
+[node name="mushroom" type="Sprite2D" groups=["food"]]
+texture = ExtResource("1_e4cte")
+region_enabled = true
+region_rect = Rect2(147, 36, 6, 10)
