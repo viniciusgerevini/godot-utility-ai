@@ -1,2 +1,2 @@
-#@icon("../icons/agent.svg")
+@icon("./icons/agent.svg")
 class_name UtilityAi extends Node

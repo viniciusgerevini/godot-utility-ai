@@ -1,5 +1,5 @@
 @tool
-#@icon("../icons/action.svg")
+@icon("../icons/action.svg")
 class_name UtilityAiAction extends UtilityAi
 
 @export var _action_id = ""

@@ -1,6 +1,6 @@
-#@icon("../icons/aggregation.svg")
+@icon("../icons/aggregation.svg")
 @tool
-class_name UtilityAiAggregation extends Node
+class_name UtilityAiAggregation extends UtilityAi
 
 enum AGGREGATION {
 	AVG,

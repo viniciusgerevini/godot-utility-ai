@@ -1,5 +1,5 @@
 @tool
-#@icon("../icons/consideration.svg")
+@icon("../icons/consideration.svg")
 ##
 ## Base consideration. Should be extend for implementing custom score logic.
 ## i.e calculate escore based in some global state.

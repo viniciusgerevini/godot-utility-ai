@@ -1,5 +1,4 @@
 @tool
-#@icon("../icons/consideration.svg")
 ##
 ## Calculate consideration score from a node's property or method.
 ##

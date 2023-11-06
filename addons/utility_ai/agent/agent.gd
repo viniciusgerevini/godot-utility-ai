@@ -1,4 +1,4 @@
-#@icon("../icons/agent.svg")
+@icon("../icons/agent.svg")
 ##
 ## Utility AI Agent that process and notify the highest utility action available.
 ##
