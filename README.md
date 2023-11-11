@@ -10,7 +10,7 @@ Assets used: [fantasy_](https://analogstudios.itch.io/fantasy) by [analogStudios
 ## What is a Utility AI
 
 A utility AI, also called utility systems, is a decision making algorithm used in game AI. It works by calculating the utility
-of each action and choosing the one with best score. I created this example for this video which explains it in more detail.
+of each action and choosing the one with best score. I created this example for this [video](https://youtu.be/d63hbJYYqM8) which explains it in more detail.
 
 In summary, the NPC has a set of actions. Each action should have one or more considerations. A consideration is scored as a number between 0 and 1.0, and a formula (curve) is applied to it to generate the utility score.
 
